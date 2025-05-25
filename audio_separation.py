@@ -1,18 +1,38 @@
 from moviepy import VideoFileClip
-from pydub import AudioSegment
-import noisereduce as nr
-import scipy.io.wavfile as wav
-import numpy as np
-import os
+from tqdm import tqdm
+import time
 
-def extract_audio_from_video(video_path, audio_path):
+def extract_audio(video_path, output_path):
     try:
-        print(f"Extracting audio from {video_path} to {audio_path}...")
-        video = VideoFileClip(video_path)
-        video.audio.write_audiofile(audio_path, codec='pcm_s16le')
-        print(f"Audio extracted successfully to {audio_path}")
-
-        video.close()
+        print(f"Đang xử lý video: {video_path}")
+        
+        # Tạo thanh tiến trình tổng thể
+        with tqdm(total=100, desc="Trích xuất âm thanh") as pbar:
+            # Đọc video
+            pbar.update(20)
+            video = VideoFileClip(video_path)
+            
+            # Tách audio
+            pbar.update(40)
+            audio = video.audio
+            
+            # Lưu file audio
+            pbar.update(30)
+            audio.write_audiofile(output_path, codec='mp3', logger=None)
+            
+            # Đóng các file
+            audio.close()
+            video.close()
+            pbar.update(10)
+            
+        print(f"\nĐã lưu âm thanh vào: {output_path}")
+        return True
         
     except Exception as e:
-        print(f"Error extracting audio: {e}")
+        print(f"Lỗi: {str(e)}")
+        return False
+
+if __name__ == "__main__":
+    video_file = r"01 Cướp Biển Vùng Caribê- Lời Nguyền Của Tàu Ngọc Trai Đen - Pirates of the Caribbean- The Curse of the Black Pearl Full HD Vietsub online - BluPhim.mp4"  
+    audio_file = "output.mp3"      
+    extract_audio(video_file, audio_file)
