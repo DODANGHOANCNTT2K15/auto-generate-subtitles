@@ -1,0 +1,9 @@
+openai-whisper
+srt
+tqdm
+torch
+librosa
+soundfile
+noisereduce
+numpy
+scipy
