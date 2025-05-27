@@ -1,9 +1,7 @@
 import librosa
 import soundfile as sf
 import noisereduce as nr
-import numpy as np
 from scipy.signal import butter, filtfilt
-from tqdm import tqdm
 
 def enhance_voice(input_path, output_path, sr=None):
     try:
@@ -55,9 +53,3 @@ def enhance_voice(input_path, output_path, sr=None):
     except Exception as e:
         print(f"❌ Lỗi: {str(e)}")
         return False
-
-if __name__ == "__main__":
-    input_file = "output.wav"  # File âm thanh đầu vào
-    output_file = "output_enhanced.wav"  # File âm thanh đã xử lý
-    
-    enhance_voice(input_file, output_file)
