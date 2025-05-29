@@ -3,7 +3,9 @@
 ![Status](https://img.shields.io/badge/status-active-brightgreen)  
 
 ## 🎯 Purpose
-
+- Automatically generate subtitles for a movie
+- Can edit, add, subtitles at intervals.
+- Has an intuitive interactive interface
 ## 📚 Required Libraries
 
 ## ⚠️ Note
